@@ -19,3 +19,19 @@ operator fun DateRange.contains(d: MyDate): Boolean {
 operator fun MyDate.rangeTo(other: MyDate): DateRange {
     return DateRange(this, other)
 }
+
+operator fun DateRange.iterator(): Iterator<MyDate> {
+    var cursor = this.start
+
+    return object : Iterator<MyDate> {
+        override fun hasNext(): Boolean {
+            return cursor <= endInclusive
+        }
+
+        override fun next(): MyDate {
+            val next = cursor
+            cursor = cursor.nextDay()
+            return next
+        }
+    }
+}
