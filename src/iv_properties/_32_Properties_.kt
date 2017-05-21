@@ -5,7 +5,14 @@ import util.doc32
 
 class PropertyExample() {
     var counter = 0
-    var propertyWithCounter: Int? = todoTask32()
+
+    private var property = 0    // field seems not to be supported in this version
+    var propertyWithCounter: Int
+        get() = property
+        set(value) {
+            counter ++
+            property = value
+        }
 }
 
 fun todoTask32(): Nothing = TODO(
